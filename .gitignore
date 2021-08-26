@@ -1,0 +1,4 @@
+.vscode/
+Pipfile.lock
+brbcoffee_logging.egg-info
+dist/

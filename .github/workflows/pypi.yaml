@@ -1,0 +1,30 @@
+name: "Push to pypi server"
+
+on:
+  push:
+    branches:
+      - "trunk"
+  workflow_dispatch:
+
+jobs:
+  push:
+      name: Build and push logging package
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2 
+
+        - name: Add python 3.9
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.9'
+        
+        - name: Install dev dependencies
+          run: python3 -m pip install pipenv
+        
+        - name: Build
+          run: pipenv run python -m build
+        
+        - name: push
+          run: pipenv run twine upload --repository-url https://pypi.brbcoffee.com -u ${{ github.actor }} -p ${{ secrets.PYPI_PASSWORD }}
