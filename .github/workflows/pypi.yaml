@@ -21,7 +21,7 @@ jobs:
             python-version: '3.9'
         
         - name: Install dev dependencies
-          run: python3 -m pip install pipenv
+          run: python3 -m pip install pipenv && pipenv install
         
         - name: Build
           run: pipenv run python -m build
